@@ -11,7 +11,20 @@ class UserController extends BaseController
 {
 
 	public function index(){
-		return User::all();
+
+		$search = \Request::get("q");
+
+		$users = User::where(function($query) use($search){
+			if($search){
+				$query
+				->where('name', 'like', '%'.$search.'%')
+				->OrWhere('email', 'like', '%'.$search.'%')
+				;
+			}
+		})->get();
+
+
+		return $this->sendResponse($users, "Listes Des utilis....");
 	}
 
 	public function show($id){
