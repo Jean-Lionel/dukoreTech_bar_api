@@ -2,8 +2,11 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\LotController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\AchatController;
 use App\Http\Controllers\StockController;
+use App\Http\Controllers\VenteController;
 use App\Http\Controllers\API\RegisterController;
 use App\Http\Controllers\EtablissementController;
 
@@ -32,4 +35,7 @@ Route::middleware('auth:sanctum')->group( function () {
     Route::resource('users', UserController::class);
     Route::resource('etablissements', EtablissementController::class);
     Route::resource('stocks', StockController::class);
+    Route::resource('achats', AchatController::class);
+    Route::resource('lots', LotController::class);
+    Route::resource('ventes', VenteController::class);
 });
