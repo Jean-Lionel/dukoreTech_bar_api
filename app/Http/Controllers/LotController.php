@@ -40,7 +40,7 @@ class LotController extends BaseController
      */
     public function show(Lot $lot)
     {
-        //
+        return $lot;
     }
 
     /**

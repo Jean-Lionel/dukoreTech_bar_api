@@ -6,6 +6,7 @@ use App\Http\Controllers\API\BaseController;
 use App\Models\Etablissement;
 use App\Http\Requests\StoreEtablissementRequest;
 use App\Http\Requests\UpdateEtablissementRequest;
+use Illuminate\Http\Request;
 
 class EtablissementController extends BaseController
 {
@@ -16,7 +17,27 @@ class EtablissementController extends BaseController
      */
     public function index()
     {
-        return Etablissement::all();
+        $search = \Request::get('q');
+
+        $companies = Etablissement::where(function($q) use($search){
+            if(strlen($search) > 1){
+                $searchElements = "%".$search."%";
+
+                $q->where("tp_name", 'like',$searchElements)
+                  ->orWhere("tp_type", 'like',$searchElements)
+                  ->orWhere("tp_TIN", 'like',$searchElements)
+                  ->orWhere("tp_trade_number", 'like',$searchElements)
+                  ->orWhere("tp_postal_number", 'like',$searchElements)
+                  ->orWhere("tp_phone_number", 'like',$searchElements)
+                  ->orWhere("tp_address_privonce", 'like',$searchElements)
+                  ->orWhere("tp_address_quartier", 'like',$searchElements)
+                  ->orWhere("tp_address_commune", 'like',$searchElements)
+                  ->orWhere("tp_address_rue", 'like',$searchElements)
+                  ->orWhere("payment_type", 'like',$searchElements)
+                  ;
+            }
+        })->latest()->take(2)->get();
+        return $this->sendResponse($companies, "Sucessfully");
     }
 
     /**
@@ -40,7 +61,7 @@ class EtablissementController extends BaseController
      */
     public function show(Etablissement $etablissement)
     {
-        //
+        return $etablissement;
     }
 
     /**
