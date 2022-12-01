@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Controllers\API\BaseController;
 use App\Models\Lot;
 use App\Http\Requests\StoreLotRequest;
 use App\Http\Requests\UpdateLotRequest;
 
-class LotController extends Controller
+class LotController extends BaseController
 {
     /**
      * Display a listing of the resource.

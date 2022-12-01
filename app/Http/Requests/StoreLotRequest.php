@@ -32,6 +32,7 @@ class StoreLotRequest extends FormRequest
                 ->where('product_id', $this->product_id)
             ],
             // "date_expiration"=> "sometimes|nullable|date",
+            "quantity"=>"required|numeric",
             "product_id"=> "sometimes|exists:products,id",
             "user_id"=> "sometimes|exists:users,id",
         ];
