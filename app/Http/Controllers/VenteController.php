@@ -27,12 +27,7 @@ class VenteController extends Controller
      */
     public function store(StoreVenteRequest $request)
     {
-        if($request->fails()){
-            return $this->sendError('Validation Error.', $request->errors());
-        }
-
         $v = Vente::create($request->validated());
-
         return $this->sendResponse( $v,"Success,Lot registered");
     }
 
