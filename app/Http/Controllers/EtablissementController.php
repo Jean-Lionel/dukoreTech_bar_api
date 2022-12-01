@@ -19,7 +19,7 @@ class EtablissementController extends BaseController
     {
         $search = \Request::get('q');
 
-        $companies = Etablissement::where(function($q) use($search){
+        $etablissements = Etablissement::where(function($q) use($search){
             if(strlen($search) > 1){
                 $searchElements = "%".$search."%";
 
@@ -37,7 +37,7 @@ class EtablissementController extends BaseController
                   ;
             }
         })->latest()->take(2)->get();
-        return $this->sendResponse($companies, "Sucessfully");
+        return $this->sendResponse($etablissements, "Sucessfully");
     }
 
     /**
@@ -84,6 +84,7 @@ class EtablissementController extends BaseController
      */
     public function destroy(Etablissement $etablissement)
     {
-        //
+        $etablissement->delete();
+        return ;
     }
 }
