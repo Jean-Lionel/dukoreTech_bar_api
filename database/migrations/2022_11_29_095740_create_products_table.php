@@ -19,6 +19,7 @@ class CreateProductsTable extends Migration
             $table->double('quantity',64,2)->nullable();
             $table->foreignId('category_id')->nullable();
             $table->foreignId('user_id')->nullable();
+            $table->softDeletes();
             $table->timestamps();
         });
     }

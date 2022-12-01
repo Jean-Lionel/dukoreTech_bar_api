@@ -15,7 +15,7 @@ class LotController extends Controller
      */
     public function index()
     {
-        //
+        return Lot::all();
     }
 
     /**
@@ -26,7 +26,9 @@ class LotController extends Controller
      */
     public function store(StoreLotRequest $request)
     {
-        //
+        $l = Lot::create($request->validated());
+
+        return $this->sendResponse( $l,"Success,Lot registered");
     }
 
     /**

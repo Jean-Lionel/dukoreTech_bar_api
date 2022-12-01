@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Controllers\API\BaseController;
 use App\Models\Etablissement;
 use App\Http\Requests\StoreEtablissementRequest;
 use App\Http\Requests\UpdateEtablissementRequest;
 
-class EtablissementController extends Controller
+class EtablissementController extends BaseController
 {
     /**
      * Display a listing of the resource.
@@ -15,8 +16,6 @@ class EtablissementController extends Controller
      */
     public function index()
     {
-        //
-
         return Etablissement::all();
     }
 
@@ -28,7 +27,9 @@ class EtablissementController extends Controller
      */
     public function store(StoreEtablissementRequest $request)
     {
-        //
+        $e = Etablissement::create($request->validated());
+
+        return $this->sendResponse( $e,"Success,Etablissement registered");
     }
 
     /**

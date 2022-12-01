@@ -15,6 +15,7 @@ class CreateAchatsTable extends Migration
     {
         Schema::create('achats', function (Blueprint $table) {
             $table->id();
+            $table->softDeletes();
             $table->timestamps();
         });
     }

@@ -35,10 +35,10 @@ class CreateEtablissementsTable extends Migration
            $table->string('tp_legal_form')->nullable();
            $table->string('payment_type')->nullable();
            $table->text('description')->nullable();
-           $table->foreignId('company_owner_id')->nullable();
+        //    $table->foreignId('company_owner_id')->nullable();
            $table->foreignId('user_id')->nullable();
-           $table->foreignId('company_category_id')->nullable();
-           $table->foreignId('company_id')->nullable();
+        //    $table->foreignId('company_category_id')->nullable();
+        //    $table->foreignId('company_id')->nullable();
            $table->boolean('is_active')->default(true);
            $table->timestamps();
            $table->softDeletes();

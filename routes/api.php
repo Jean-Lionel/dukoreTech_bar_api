@@ -8,7 +8,11 @@ use App\Http\Controllers\AchatController;
 use App\Http\Controllers\StockController;
 use App\Http\Controllers\VenteController;
 use App\Http\Controllers\API\RegisterController;
+use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\CompanyOwnerController;
 use App\Http\Controllers\EtablissementController;
+use App\Http\Controllers\ProductController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -29,11 +33,13 @@ Route::controller(RegisterController::class)->group(function(){
     Route::post('register', 'register');
     Route::post('login', 'login');
 });
-        
+
 Route::middleware('auth:sanctum')->group( function () {
     Route::resource('products', ProductController::class);
+    Route::resource('category', CategoryController::class);
     Route::resource('users', UserController::class);
     Route::resource('etablissements', EtablissementController::class);
+    Route::resource('company_owners', CompanyOwnerController::class);
     Route::resource('stocks', StockController::class);
     Route::resource('achats', AchatController::class);
     Route::resource('lots', LotController::class);

@@ -26,7 +26,13 @@ class CategoryController extends Controller
      */
     public function store(StoreCategoryRequest $request)
     {
-        //
+        if($request->fails()){
+            return $this->sendError('Validation Error.', $request->errors());
+        }
+
+        $product = Category::create($request->validated());
+
+        return $this->sendResponse($product, 'Product created successfully.');
     }
 
     /**

@@ -15,7 +15,7 @@ class AchatController extends Controller
      */
     public function index()
     {
-        //
+        return Achat::all();
     }
 
     /**
@@ -26,7 +26,13 @@ class AchatController extends Controller
      */
     public function store(StoreAchatRequest $request)
     {
-        //
+        if($request->fails()){
+            return $this->sendError('Validation Error.', $request->errors());
+        }
+
+        $a = Achat::create($request->validated());
+
+        return $this->sendResponse( $a,"Success,Lot registered");
     }
 
     /**

@@ -19,6 +19,7 @@ class CreateLotsTable extends Migration
             $table->double("quantity");
             $table->foreignId("product_id");
             $table->foreignId("user_id");
+            $table->softDeletes();
             $table->timestamps();
         });
     }

@@ -18,6 +18,7 @@ class CreateStocksTable extends Migration
             $table->string("name");
             $table->foreignId("etablissement_id");
             $table->foreignId("user_id");
+            $table->softDeletes();
             $table->timestamps();
         });
     }

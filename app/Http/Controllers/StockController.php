@@ -27,7 +27,9 @@ class StockController extends Controller
      */
     public function store(StoreStockRequest $request)
     {
-        //
+        $s = Stock::create($request->validated());
+
+        return $this->sendResponse( $s,"Success,Stock added Successfully.");
     }
 
     /**

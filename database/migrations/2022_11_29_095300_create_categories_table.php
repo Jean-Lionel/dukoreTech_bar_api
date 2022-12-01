@@ -19,6 +19,7 @@ class CreateCategoriesTable extends Migration
             $table->foreignId("etablissement_id");
             $table->foreignId("stock_id");
             $table->foreignId("user_id");
+            $table->softDeletes();
             $table->timestamps();
         });
     }

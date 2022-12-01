@@ -13,7 +13,7 @@ class StoreProductRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -23,8 +23,21 @@ class StoreProductRequest extends FormRequest
      */
     public function rules()
     {
+
         return [
-            //
+            "name" => "required",
+            "quantity" => "required",
+            "category_id" => "exists:categories,id",
+            "user_id" => "exists:users,id",
+        ];
+    }
+    public function messages()
+    {
+        return [
+            'name.required' => 'The name is required',
+            'quantity.required'  => 'The quantity is required',
+            'category_id.exists'  => "The category doesn't exist",
+            'user_id.exists'  => "The user doesn't exist",
         ];
     }
 }
