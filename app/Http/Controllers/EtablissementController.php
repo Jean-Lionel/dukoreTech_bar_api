@@ -71,9 +71,11 @@ class EtablissementController extends BaseController
      * @param  \App\Models\Etablissement  $etablissement
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateEtablissementRequest $request, Etablissement $etablissement)
+    public function update(StoreEtablissementRequest $request, Etablissement $etablissement)
     {
-        //
+        $etablissement->update($request->validated());
+
+        return $this->sendResponse($etablissement, 'Etablissement updated successfully.');
     }
 
     /**

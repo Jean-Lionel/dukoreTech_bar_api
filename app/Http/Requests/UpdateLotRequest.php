@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class UpdateLotRequest extends FormRequest
 {
@@ -13,7 +14,7 @@ class UpdateLotRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +25,16 @@ class UpdateLotRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            "name" =>  [
+                'required',
+                Rule::unique('lots')
+                // ->where('date_expiration', $this->date_expiration)
+                ->where('product_id', $this->product_id)
+            ],
+            // "date_expiration"=> "sometimes|nullable|date",
+            "quantity"=>"required|numeric",
+            "product_id"=> "sometimes|exists:products,id",
+            "user_id"=> "sometimes|exists:users,id",
         ];
     }
 }

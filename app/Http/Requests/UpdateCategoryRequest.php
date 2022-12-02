@@ -13,7 +13,7 @@ class UpdateCategoryRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,19 @@ class UpdateCategoryRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            "name" => "required",
+            "stock_id" => "exists:stocks,id",
+            "etablissement_id" => "exists:etablissements,id",
+            "user_id" => "exists:users,id",
+        ];
+    }
+    public function messages()
+    {
+        return [
+            'name.required' => 'The name is required',
+            'stock_id.exists'  => "The stock doesn't exist",
+            'etablissement_id.exists'  => "The company doesn't exist",
+            'user_id.exists'  => "The user doesn't exist",
         ];
     }
 }
