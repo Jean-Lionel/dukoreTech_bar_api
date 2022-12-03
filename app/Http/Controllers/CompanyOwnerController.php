@@ -15,7 +15,7 @@ class CompanyOwnerController extends Controller
      */
     public function index()
     {
-        //
+        return CompanyOwner::all();
     }
 
     /**
@@ -26,7 +26,9 @@ class CompanyOwnerController extends Controller
      */
     public function store(StoreCompanyOwnerRequest $request)
     {
-        //
+        $e = CompanyOwner::create($request->validated());
+
+        return $this->sendResponse( $e,"Success,Etablissement registered");
     }
 
     /**
@@ -37,7 +39,7 @@ class CompanyOwnerController extends Controller
      */
     public function show(CompanyOwner $companyOwner)
     {
-        //
+        return $companyOwner;
     }
 
     /**
@@ -49,7 +51,9 @@ class CompanyOwnerController extends Controller
      */
     public function update(UpdateCompanyOwnerRequest $request, CompanyOwner $companyOwner)
     {
-        //
+        $companyOwner->update($request->validated());
+
+        return $this->sendResponse($companyOwner, 'Etablissement updated successfully.');
     }
 
     /**
@@ -60,6 +64,7 @@ class CompanyOwnerController extends Controller
      */
     public function destroy(CompanyOwner $companyOwner)
     {
-        //
+        $companyOwner->delete();
+        return ;
     }
 }
