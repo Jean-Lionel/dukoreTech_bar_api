@@ -48,7 +48,7 @@ class EtablissementController extends BaseController
      */
     public function store(StoreEtablissementRequest $request)
     {
-        $e = Etablissement::create($request->validated());
+        $e = Etablissement::create($request->all());
 
         return $this->sendResponse( $e,"Success,Etablissement registered");
     }
@@ -73,7 +73,7 @@ class EtablissementController extends BaseController
      */
     public function update(StoreEtablissementRequest $request, Etablissement $etablissement)
     {
-        $etablissement->update($request->validated());
+        $etablissement->update($request->all());
 
         return $this->sendResponse($etablissement, 'Etablissement updated successfully.');
     }
