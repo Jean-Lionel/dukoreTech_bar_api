@@ -15,8 +15,17 @@ class CreateAchatsTable extends Migration
     {
         Schema::create('achats', function (Blueprint $table) {
             $table->id();
-            $table->softDeletes();
+            $table->foreignId('product_id');
+            $table->double('price_achat');
+            $table->double('quantite');
+            $table->double('prix_total');
+            $table->double('prix_vente');
+            $table->date('date_achat')->nullable();
+            $table->foreignId('lot_id')->nullable();
+            $table->foreignId('user_id')->nullable();
+            $table->foreignId('etablissement_id')->nullable();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

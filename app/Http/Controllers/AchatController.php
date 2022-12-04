@@ -2,11 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Controllers\API\BaseController;
 use App\Models\Achat;
 use App\Http\Requests\StoreAchatRequest;
 use App\Http\Requests\UpdateAchatRequest;
+use App\Models\Lot;
+use App\Models\Product;
+use Illuminate\Support\Facades\Auth;
 
-class AchatController extends Controller
+class AchatController extends BaseController
 {
     /**
      * Display a listing of the resource.
@@ -26,9 +30,28 @@ class AchatController extends Controller
      */
     public function store(StoreAchatRequest $request)
     {
-        $a = Achat::create($request->validated());
+        $achat = [
+            "product_id" => $request->product_id,
+            "price_achat" => $request->price_achat,
+            "quantite" => $request->quantite,
+            "prix_total" => ($request->price_achat * $request->quantite),
+            "prix_vente" => $request->prix_vente,
+            "date_achat" => $request->date_achat,
+            "lot_id" => $request->lot_id,
+            "user_id" => Auth::user()->id,
+        ];
+            $product = Product::find($request->product_id);
+            $product->quantity += $achat["quantite"];
+            $lot = Lot::find($request->lot_id);
 
-        return $this->sendResponse( $a,"Success,Lot registered");
+            if($lot){
+                $lot->quantity += $achat["quantite"];
+                $lot->save();
+            }
+            $product->save();
+            $achatProduct = Achat::create($achat);
+
+        return $this->sendResponse( $achatProduct,"Success,Lot registered");
     }
 
     /**
