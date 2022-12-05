@@ -2,12 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+
 use App\Models\Etablissement;
 use App\Http\Controllers\API\BaseController;
-use App\Http\Requests\StoreEtablissementRequest;
-use App\Http\Requests\UpdateEtablissementRequest;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Http\Request;
 
 class EtablissementController extends BaseController
 {
@@ -93,16 +92,39 @@ class EtablissementController extends BaseController
         return $etablissement;
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \App\Http\Requests\UpdateEtablissementRequest  $request
-     * @param  \App\Models\Etablissement  $etablissement
-     * @return \Illuminate\Http\Response
-     */
-    public function update(UpdateEtablissementRequest $request, Etablissement $etablissement)
+   
+    public function update(Request $request,  $etablissement)
     {
-        $etablissement->update($request->all());
+        $input = $request->all();
+
+       $validator = Validator::make($input, [
+           "tp_name" => "required",
+           "tp_type" => "sometimes|between:1,2",
+           "tp_TIN" => "required|unique:etablissements|max:30",
+           "tp_trade_number" => "sometimes",
+           "tp_postal_number" => "sometimes",
+           "tp_phone_number" => "sometimes",
+           "tp_address_privonce" => "sometimes",
+           "tp_address_quartier" => "sometimes",
+           "tp_address_commune" => "sometimes",
+           "tp_address_rue" => "sometimes",
+           "tp_address_number" => "sometimes",
+           "vat_taxpayer" => "sometimes|in:0,1",
+           "ct_taxpayer" => "sometimes|in:0,1",
+           "tl_taxpayer" => "sometimes|in:0,1",
+           "tp_fiscal_center" => "sometimes|in:DGC,DMC,DPMC",
+           "tp_activity_sector" => "sometimes",
+           "tp_legal_form" => "sometimes",
+           "payment_type" => "sometimes|in:1,2,3,4,5",
+           "description" => "sometimes"
+       ]);
+
+       if($validator->fails()){
+        return $this->sendError('Validation Error.', $validator->errors());
+    }
+
+
+        //$etablissement->update($request->all());
 
         return $this->sendResponse($etablissement, 'Etablissement updated successfully.');
     }
