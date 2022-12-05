@@ -12,7 +12,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\API\RegisterController;
 use App\Http\Controllers\CompanyOwnerController;
 use App\Http\Controllers\EtablissementController;
-use App\Http\Controllers\ProductController;
+
 
 
 /*
@@ -39,7 +39,7 @@ Route::middleware('auth:sanctum')->group( function () {
     Route::resource('products', ProductController::class);
     Route::resource('category', CategoryController::class);
     Route::resource('users', UserController::class);
-    Route::resource('etablissements', EtablissementsController::class);
+    Route::resource('etablissements', EtablissementController::class);
     Route::resource('company_owners', CompanyOwnerController::class);
     Route::resource('stocks', StockController::class);
     Route::resource('achats', AchatController::class);
