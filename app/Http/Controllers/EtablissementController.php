@@ -9,7 +9,7 @@ use App\Http\Requests\StoreEtablissementRequest;
 use App\Http\Requests\UpdateEtablissementRequest;
 use Illuminate\Support\Facades\Validator;
 
-class EtablissementsController extends BaseController
+class EtablissementController extends BaseController
 {
     /**
      * Display a listing of the resource.
@@ -41,12 +41,10 @@ class EtablissementsController extends BaseController
         return $this->sendResponse($etablissements, "Sucessfully");
     }
 
-
-
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\StoreEtablissementRequest  $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -87,22 +85,19 @@ class EtablissementsController extends BaseController
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Models\Etablissement  $etablissement
      * @return \Illuminate\Http\Response
      */
     public function show(Etablissement $etablissement)
     {
         return $etablissement;
-
     }
-
-
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \App\Http\Requests\UpdateEtablissementRequest  $request
+     * @param  \App\Models\Etablissement  $etablissement
      * @return \Illuminate\Http\Response
      */
     public function update(UpdateEtablissementRequest $request, Etablissement $etablissement)
@@ -115,7 +110,7 @@ class EtablissementsController extends BaseController
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  \App\Models\Etablissement  $etablissement
      * @return \Illuminate\Http\Response
      */
     public function destroy(Etablissement $etablissement)
