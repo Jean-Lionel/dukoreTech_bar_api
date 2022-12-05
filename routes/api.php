@@ -7,11 +7,12 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\AchatController;
 use App\Http\Controllers\StockController;
 use App\Http\Controllers\VenteController;
-use App\Http\Controllers\API\RegisterController;
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\API\RegisterController;
 use App\Http\Controllers\CompanyOwnerController;
 use App\Http\Controllers\EtablissementController;
-use App\Http\Controllers\ProductController;
+use App\Http\Controllers\EtablissementsController;
 
 
 /*
