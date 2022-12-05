@@ -13,7 +13,7 @@ class StoreAchatRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,11 @@ class StoreAchatRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            "price_achat" => "required|numeric",
+            "product_id" => "required|exists:products,id",
+            "quantite" => "required|numeric",
+            "prix_vente" => "required|numeric",
+            "date_achat" => "sometimes|date|before_or_equal:today",
         ];
     }
 }

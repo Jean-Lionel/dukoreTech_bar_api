@@ -98,7 +98,7 @@ class ProductController extends BaseController
         $product->quantity = $input['quantity'];
         $product->category_id = $input['category_id'];
         $product->user_id = Auth::user()->id;
-        $product->save();
+        $product->update();
 
         return $this->sendResponse($product, 'Product updated successfully.');
     }

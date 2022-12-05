@@ -26,7 +26,7 @@ class CompanyOwnerController extends Controller
      */
     public function store(StoreCompanyOwnerRequest $request)
     {
-        $e = CompanyOwner::create($request->validated());
+        $e = CompanyOwner::create($request->all());
 
         return $this->sendResponse( $e,"Success,Etablissement registered");
     }
